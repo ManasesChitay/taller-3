@@ -1,0 +1,60 @@
+/*
+   Fundacion Kinal
+   Centro educativo tecnico laboral Kinal
+   Quinto perito
+   Quinto electronica
+   Codigo Tecnico: EB5AM / EB5AV 
+   Curso: Taller de electronica digital y reparacion de computadoras I
+   Proyecto: Uso del monitor serial
+   Dev: Fidel Eliseo Manases Chitay
+   Fecha: 19 de abril
+ */
+
+
+byte productoactual = 1;
+
+struct productos {
+  char nombre_producto[25];
+  int inventario;
+};
+
+productos dulce_1 = {"gomitas", 30};
+productos dulce_2 = {"cerezas", 30};
+productos dulce_3 = {"tortrix", 30};
+productos dulce_4 = {"MyM", 30};
+
+void setup() {
+Serial.begin(9600); 
+  pinMode(2, INPUT);
+  pinMode(3, INPUT);
+}
+
+void loop() {
+  if (digitalRead(2)==HIGH) {
+    delay(200);
+    productoactual = productoactual+1;
+  } else if (digitalRead(3) == HIGH) {
+    delay(200);
+    productoactual = productoactual-1;
+  }else{}
+  
+  if(productoactual == 1) {
+  Serial.println(dulce_1.nombre_producto);
+  Serial.println(dulce_1.inventario);
+  } else if (productoactual == 2){
+  Serial.println(dulce_2.nombre_producto);
+  Serial.println(dulce_2.inventario);  
+  } else if (productoactual == 3){
+  Serial.println(dulce_3.nombre_producto);
+  Serial.println(dulce_3.inventario);
+  } else if (productoactual == 4){
+  Serial.println(dulce_4.nombre_producto);
+  Serial.println(dulce_4.inventario);
+  } else if (productoactual == 5){
+  delay(500);
+  productoactual = 1;
+  } else {
+  delay(500);
+  productoactual = 4;
+  }
+}
